@@ -1,0 +1,36 @@
+﻿Challenge Question for Project: Context Retrieval for SE Agents
+Overview
+This challenge question is intended for students interested in joining our research project on context retrieval in software engineering agents. It is intended to take around 3-5 hours of effort to complete and will be used to evaluate technical skills relevant to the research project. Please submit your response as soon as possible, as we will be evaluating responses as they are submitted. For any questions before then, email hm3075@columbia.edu. By the end of this week, we expect to invite 1-3 students to join the project, but we may follow up with applicants before doing so.
+Project Description
+We are studying LLM agents for automated program repair/debugging. Even with increasingly powerful LLMs, the performance of code agents on complex tasks remains dependent on what information, or context, the models have. When considering the task of code repair on repository-level projects, the entire codebase can be huge, too large to give to an LLM in a prompt. We are exploring how to identify and collect relevant context from a Python repository that enables coding agents to successfully resolve a reported bug. For a given buggy method, such context might include the class to which the buggy method belongs, code that invokes the buggy method, documentation describing intended behavior, etc. Research questions include: What code, documentation, or other repository context is necessary for an agent to understand the underlying cause of a given bug and resolve it? What strategies are the most effective for agents to retrieve such context? If agents obtain all relevant context, how much does their overall performance improve on the task of program repair?
+Challenge Question
+Challenge Question Instructions
+For the challenge question, you will be analyzing one or more agent trajectories, i.e. the steps an agent took to try to complete a task, for a task from the SWE-bench_Verified dataset. You will analyze an issue that the agent did not successfully resolve to understand why the agent failed at the task. The specific steps are outlined here:
+1. Choose one task (e.g. astropy__astropy-12907) where the agent did not resolve the issue. Make sure to pick an instance for which you can complete all subsequent steps.
+   * The agent trajectories can be accessed here (@evaluation/python/verified/20250329_OpenHands_Claude-3.5-Sonnet(Oct)/trajs) in the traj directory; please only choose trajectories within this directory, which are the trajectories of the OpenHands CodeActAgent with Claude-3.5-Sonnet on Python tasks. 
+   * Be sure to choose a task that the agent did not resolve, which is recorded in the results file here (@evaluation/python/verified/20250329_OpenHands_Claude-3.5-Sonnet(Oct)/results/results.json).
+   * More information about the tasks can be found in the SWE-bench_Verified dataset, including the base commit for the repository, which is the version of the project that the agent is trying to patch. The number in the task/instance id is the pull request number of the developer/ground-truth solution (e.g. the task astropy__astropy-12907 is from this developer PR: www.github.com/astropy/astropy/pull/12907).The pull requests usually also link to the original GitHub issue.
+2. For the chosen unresolved task and agent trajectory, manually analyze/explore what steps the agent took in trying to resolve the task. It would likely be best to start by understanding the reported issue and the correct fix/patch yourself first, then looking at how the agent tried to fix the issue. Think about the questions below while analyzing the agent trajectory:
+   * What information does the agent use from the issue description to then search the repository?
+   * What files/code does the agent view before creating a patch?
+   * What files/code does the agent actually edit?
+   * What tests, if any, does the agent create or run to validate its patch?
+3. After analyzing the agent trajectory, explain why the agent was unsuccessful in resolving the issue. 
+   * You can explain in natural language and/or include screenshots, images, or any other information to help demonstrate mistakes made by the agent. You can do this in any organized format: a text document, a slide deck, etc.
+   * Your explanation should be self-contained, so a competent developer who has not seen the GitHub issue before could get a basic understanding from your explanation of what the bug is, how the agent tried to fix it, and what the actual correct fix is.
+4. Finally, suggest in 1-2 paragraphs at least one way that better context retrieval could have improved the agent’s trajectory and helped it resolve the issue. 
+   * For example, would some other file or code in the repository have better informed how to resolve the bug? What specific context was the agent missing that could have improved the results?
+
+
+Submitting the Challenge Question Response
+The main output that we will look at from the challenge question is the explanation of the agent’s unsuccessful trajectory. It is important in this project to be able to critically analyze an agent’s attempt to resolve a software bug, and to be able to share this information effectively to others. As mentioned above, you may explain your analysis of the agent’s trajectory in natural language, with screenshots/images, with snippets of specific code, or anything else. You may format it in a text document, on a slide deck, or whatever is most effective for you. 
+Optionally, please also submit any code you used to parse and/or display the agent trajectories during your analysis. This can help demonstrate your programming/technical abilities.
+Once you have completed the challenge question, send your response (including your explanation/analysis described above and any code) to hm3075@columbia.edu. Be sure that you have also submitted this Google form.
+Additional Information/Resources
+If you are very interested in this research project, here is a list of relevant research papers that may give some more insight and background into this area of research. The most relevant ones to this project are SWE-Bench (the dataset we are currently using) and OpenHands (the agent we are currently using).  
+* SWE-Bench
+* SWE-Agent
+* OpenHands
+* AutoCodeRover → SpecRover
+* LocAgent
+* KGCompass
