@@ -1,6 +1,6 @@
 # SWE-bench Trajectory Analysis Tools
 
-This repository contains tools for analyzing OpenHands CodeActAgent trajectories on SWE-bench_Verified tasks, specifically for the challenge question analyzing agent failures.
+A research toolkit for analyzing LLM agent failures on software engineering tasks using interactive trajectory visualization and statistical analysis.
 
 ## Overview
 
@@ -12,9 +12,8 @@ The repository contains:
 ## Files
 
 ### Analysis Tools
-- `find_candidates.py` - Identifies promising failed tasks for detailed analysis
 - `trajectory_analysis.ipynb` - Jupyter notebook for exploratory data analysis
-- `trajectory_viewer.py` - Streamlit app for interactive trajectory visualization
+- `trajectory_viewer.py` - Enhanced Streamlit app for interactive trajectory visualization
 
 ### Data Structure
 ```
@@ -35,20 +34,12 @@ evaluation/python/verified/20250329_OpenHands_Claude-3.5-Sonnet(Oct)/
 pip install -r requirements.txt
 ```
 
-### 2. Find Good Candidates for Analysis
-```bash
-python find_candidates.py
-```
-
-This script:
-- Analyzes the first 50 unresolved tasks
-- Scores them based on complexity, file modifications, errors, test runs
-- Outputs top 10 candidates with GitHub URLs and key metrics
-
-### 3. Interactive Trajectory Viewing
+### 2. Interactive Trajectory Viewing
 ```bash
 streamlit run trajectory_viewer.py
 ```
+
+**Public Access**: A live version is available at https://swe-agent-eval.streamlit.app/
 
 This launches a web interface where you can:
 - Browse all tasks (resolved/unresolved) with automatic navigation
@@ -59,7 +50,7 @@ This launches a web interface where you can:
 - See action distribution charts and trajectory statistics
 - Download raw trajectory data
 
-### 4. Detailed Analysis (Jupyter)
+### 3. Detailed Analysis (Jupyter)
 ```bash
 jupyter notebook trajectory_analysis.ipynb
 ```
@@ -67,15 +58,19 @@ jupyter notebook trajectory_analysis.ipynb
 This notebook provides:
 - Statistical analysis of trajectory patterns
 - Visualization of action distributions
-- Tools for candidate selection
+- Tools for task/issue selection with analytical potential
 - Sample trajectory examination
 
 ## Challenge Question Workflow
 
 ### Phase 1: Candidate Selection
-1. Run `find_candidates.py` to identify top candidates
-2. Use `trajectory_viewer.py` to explore promising tasks
-3. Check GitHub PRs to understand the original issues
+1. Use `trajectory_viewer.py` to explore trajectory data:
+   - Filter by project and task type (resolved/unresolved)
+   - Use Previous/Next navigation to browse through filtered tasks
+   - Use sidebar table of contents to jump to specific trajectory steps
+   - Focus on individual steps for detailed analysis
+   - Look for error indicators (❌) and success markers (✅) in tool results
+2. Check GitHub PRs to understand the original issues
 
 ### Phase 2: Detailed Analysis
 1. Select one task with interesting failure patterns
@@ -106,6 +101,7 @@ For example: `astropy__astropy-12907`
 - **Unresolved**: ~252 (available for analysis)
 - **Agent**: OpenHands CodeActAgent with Claude-3.5-Sonnet
 - **Date**: March 29, 2025 evaluation run
+- **Source**: Agent trajectories from https://github.com/multi-swe-bench/experiments
 
 ## Key Analysis Questions
 
@@ -120,15 +116,14 @@ When analyzing a failed trajectory, consider:
 
 ## Example Analysis Flow
 
-1. `python find_candidates.py` → Identify top candidates
-2. `streamlit run trajectory_viewer.py` → Explore candidate trajectories
+1. `streamlit run trajectory_viewer.py` → Explore trajectory data
    - Use Previous/Next navigation to browse through filtered tasks
    - Use sidebar table of contents to jump to specific trajectory steps
    - Focus on individual steps for detailed analysis
    - Look for error indicators (❌) and success markers (✅) in tool results
-3. Research GitHub issue and correct solution
-4. Trace agent steps and identify failure points
-5. Document analysis with recommendations for better context retrieval
+2. Research GitHub issue and correct solution
+3. Trace agent steps and identify failure points
+4. Document analysis with recommendations for better context retrieval
 
 ## Trajectory Viewer Features
 
